@@ -24,15 +24,19 @@ URL을 주면 댓글을 자동으로 수집하고, 직접 붙여넣어도 된다
 Bash 도구로 아래 명령을 실행해 댓글을 가져온다.
 
 ```bash
-/Users/hanwha/Library/Python/3.9/bin/yt-dlp \
+YTDLP=$(which yt-dlp 2>/dev/null || python3 -m yt_dlp --version > /dev/null 2>&1 && echo "python3 -m yt_dlp")
+TMPDIR=$(mktemp -d)
+$YTDLP \
   --write-comments \
   --skip-download \
   --no-warnings \
-  -o "/private/tmp/claude-501/-Users-hanwha/f96da85d-6228-4653-8732-3e197191a974/scratchpad/yt_comments" \
+  -o "$TMPDIR/yt_comments" \
   "[URL]"
 ```
 
-생성된 `.info.json` 파일에서 `comments` 배열을 읽어 `author` + `text` + `id` 필드를 추출한다.
+yt-dlp가 없으면 `pip3 install yt-dlp` 설치를 안내하고 중단한다.
+
+생성된 `$TMPDIR/yt_comments.info.json` 파일에서 `comments` 배열을 읽어 `author` + `text` + `id` 필드를 추출한다.
 댓글이 너무 많으면 최신순 500개까지만 사용하고 사용자에게 알린다.
 `id` 필드로 댓글 직접 링크를 생성한다: `https://www.youtube.com/watch?v=VIDEO_ID&lc=COMMENT_ID`
 
