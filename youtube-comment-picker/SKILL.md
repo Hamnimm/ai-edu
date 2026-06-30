@@ -32,8 +32,9 @@ Bash 도구로 아래 명령을 실행해 댓글을 가져온다.
   "[URL]"
 ```
 
-생성된 `.info.json` 파일에서 `comments` 배열을 읽어 `author` + `text` 필드를 추출한다.
+생성된 `.info.json` 파일에서 `comments` 배열을 읽어 `author` + `text` + `id` 필드를 추출한다.
 댓글이 너무 많으면 최신순 500개까지만 사용하고 사용자에게 알린다.
+`id` 필드로 댓글 직접 링크를 생성한다: `https://www.youtube.com/watch?v=VIDEO_ID&lc=COMMENT_ID`
 
 ## 필터링 기준 — 이 댓글은 탈락
 
@@ -80,6 +81,7 @@ Bash 도구로 아래 명령을 실행해 댓글을 가져온다.
 ---
 
 **🏆 1위 — [닉네임]** (점수: XX/100)
+🔗 [댓글 바로가기](https://www.youtube.com/watch?v=VIDEO_ID&lc=COMMENT_ID)
 
 > 댓글 원문 그대로
 
@@ -88,6 +90,7 @@ Bash 도구로 아래 명령을 실행해 댓글을 가져온다.
 ---
 
 **🥈 2위 — [닉네임]** (점수: XX/100)
+🔗 [댓글 바로가기](https://www.youtube.com/watch?v=VIDEO_ID&lc=COMMENT_ID)
 
 > 댓글 원문 그대로
 
